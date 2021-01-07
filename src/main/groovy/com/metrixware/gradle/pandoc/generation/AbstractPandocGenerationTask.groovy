@@ -22,7 +22,6 @@ abstract class AbstractPandocGenerationTask extends AbstractGenerationTask{
 			'--toc',
 			'--toc-depth='+tocDepth,
 			'--section-divs',
-			'--smart',
 			'--output=' + tmpOut,
 			input
 		]
