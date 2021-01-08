@@ -1,3 +1,5 @@
+This is a fork of https://github.com/sleroy/gradle-doc-plugin
+
 [![Travis Build Status](http://img.shields.io/travis/sleroy/gradle-pandoc-plugin.svg)](https://travis-ci.org/sleroy/gradle-doc-plugin)
 [![Coverage Status](http://img.shields.io/coveralls/sleroy/gradle-pandoc-plugin.svg)](https://coveralls.io/r/sleroy/gradle-doc-plugin)
 [![Semantic Versioning](http://img.shields.io/:semver-0.1.1-blue.svg)](http://semver.org)
@@ -17,7 +19,7 @@ See [here](http://www.andy-roberts.net/writing/latex) for some LaTeX tutorials.
 Prerequisites
 ==
 
-The plugin requires several programs installed on your machine. Basically, on Ubuntu system, install the following packages `pandoc, latex`.
+The plugin requires several programs installed on your machine. Basically, on a Ubuntu system, install the following packages `pandoc, latex`.
 
 Obviously, [gradle](http://www.gradle.org/) should be installed and located in your $PATH variable. The plugin has been developped and tested for gradle v2.1.
 
@@ -27,29 +29,40 @@ Quickstart
 
 ## Installation
 
+Create a local copy of your the plugin:
 
-Insert the following snippet in your build.gradle of your gradle project.
+```bash
+git fetch https://github.com/ckaiser79/gradle-doc-plugin.git
+cd gradle-doc-plugin
 
-  buildscript { 
-      repositories {
-    mavenLocal()
-          jcenter()
-          maven { url 'http://dl.bintray.com/sleroy/maven' }
-      }
-      dependencies {
-          classpath 'com.metrixware:gradle-doc-plugin:0.1.4'
-      }
-  }
-  apply plugin: 'pandoc'
-  apply plugin : 'java'
+# will build it and copy it to your local maven repository
+./gradlew install 
 
+```
+
+Insert the following snippet in your build.gradle of your gradle project:
+
+```groovy
+buildscript { 
+    repositories { 
+        mavenLocal() 
+        jcenter() 
+    } 
+    dependencies { 
+        classpath 'com.metrixware:gradle-doc-plugin:0.2.0-SNAPSHOT' 
+    } 
+} 
+
+apply plugin: 'pandoc'
+apply plugin : 'java'
+```
 
 
 ## Configuration
 
 Next step is to configure your documentation project. You will declare a single document and single template for this document. Insert the following lines in your build.gradle to configure the project to generate HTML and PDF documentation from a single markdown file.
 
-
+```groovy
 	documentation{
 		templates{
 			template{
@@ -66,20 +79,29 @@ Next step is to configure your documentation project. You will declare a single 
 			}
 		}
 	}
+```
 
-The `output` field of a template specifies the supported outputs of the template (html, pdf, epub or eclipse).
+The `output` field of a template specifies the supported outputs of the template:
+
+ * html
+ * pdf
+ * epub or
+ * eclipse
 	
 To create the default project structure to store your documentation, please write the following command :
 
+```bash
 	gradle pandoc-configure
-
+```
 The default structure looks like : 
 	
+```
 	├── build
 	├── build.gradle
 	├── docs
 	│   ├── sources
 	│   └── templates
+```
 
 Documentation project structure:
 	

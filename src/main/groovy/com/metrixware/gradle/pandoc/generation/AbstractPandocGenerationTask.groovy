@@ -22,8 +22,8 @@ abstract class AbstractPandocGenerationTask extends AbstractGenerationTask{
 			'--toc',
 			'--toc-depth='+tocDepth,
 			'--section-divs',
-			'--smart',
 			'--output=' + tmpOut,
+			'--metadata=title:"' + doc.name + '"',
 			input
 		]
 		if(hasTemplate(template,output)){

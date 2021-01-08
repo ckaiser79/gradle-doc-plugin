@@ -4,11 +4,11 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y pandoc
 
-script: ./gradlew clean build cobertura
+script: ./gradlew clean build
 
 jdk:
-  - oraclejdk7
-  - openjdk7
+  - oraclejdk8
+  - openjdk8
 
 env: TERM=dumb
 
