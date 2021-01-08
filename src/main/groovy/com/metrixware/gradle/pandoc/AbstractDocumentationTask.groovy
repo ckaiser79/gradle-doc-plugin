@@ -27,8 +27,7 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 	@Internal
 	File sourcesFolder
 
-	@OutputDirectory
-	@Optional
+	@Internal
 	File outputDir
 
 	@Internal

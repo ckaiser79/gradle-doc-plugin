@@ -52,7 +52,17 @@ class DocumentationConfigurationTask extends AbstractDocumentationTask {
 				def outputDir = FileUtils.getFile(folder,lang)
 				outputDir.mkdir()
 				getDocumentPropertiesFile(document, lang).createNewFile()
-				getDocumentSourceFile(document, lang).createNewFile()
+
+				if(document.includedSources.length == 0) {
+					getDocumentSourceFile(document, lang).createNewFile()
+				}
+				else {
+					document.includedSources.each { s -> 
+						File f = FileUtils.getFile(getDocumentFolder(document,lang),s + '.' + document.type)
+						f.createNewFile()
+					}
+
+				}
 				FileUtils.getFile(outputDir,'images')
 			}
 		}
