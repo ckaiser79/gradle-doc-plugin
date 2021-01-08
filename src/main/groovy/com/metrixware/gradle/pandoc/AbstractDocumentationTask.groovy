@@ -7,6 +7,10 @@ import org.apache.commons.lang3.text.StrSubstitutor
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
+
 abstract class AbstractDocumentationTask extends DefaultTask {
 
 	static final String DOCS = 'docs'
@@ -14,16 +18,27 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 	static final String SOURCES = 'sources'
 	static final String TMP = 'tmp'
 
-
+	@Internal
 	File rootFolder
+
+	@Internal
 	File templatesFolder
+
+	@Internal
 	File sourcesFolder
+
+	@OutputDirectory
+	@Optional
 	File outputDir
+
+	@Internal
 	File tmpFolder
+
+	@Internal
 	File tmpTemplatesFolder
+
+	@Internal
 	File tmpSourcesFolder
-
-
 
 	@TaskAction
 	void runTask(){
@@ -47,27 +62,31 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 		if(docOutputDirectory.startsWith('/')){
 			outputDir  = new File(docOutputDirectory)
 		}else{
-
 			outputDir = new File(project.projectDir,docOutputDirectory)
 		}
+
 		String docTempDirectory = project.documentation.tmpDirectory
 		if(docTempDirectory.startsWith('/')){
 			tmpFolder  = new File(docTempDirectory)
 		}else{
 			tmpFolder = new File(project.projectDir,docTempDirectory)
 		}
+		
 		tmpTemplatesFolder =FileUtils.getFile(tmpFolder,TEMPLATES)
 		tmpSourcesFolder =FileUtils.getFile(tmpFolder,SOURCES)
 	}
 
+	@Nested
 	Collection<Template> getTemplates(){
 		return project.documentation.templates
 	}
 
+	@Nested
 	Collection<Document> getDocuments(){
 		return project.documentation.documents
 	}
 	
+	@Nested
 	Collection<Repository> getRepositories(){
 		return project.documentation.repositories
 	}
@@ -87,11 +106,11 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 
 
 	File getDocumentSourceFile(Document doc, String lang){
-		return FileUtils.getFile(getDocumentFolder(doc,lang),doc.name+'-'+lang+'.'+doc.type)
+		return FileUtils.getFile(getDocumentFolder(doc,lang),doc.name + '.'+doc.type)
 	}
 
 	File getDocumentPropertiesFile(Document doc, String lang){
-		return FileUtils.getFile(getDocumentFolder(doc,lang),doc.name+'-'+lang+'.properties')
+		return FileUtils.getFile(getDocumentFolder(doc,lang),doc.name + '.properties')
 	}
 
 	File getTemplateFolder(Template template, String output){
@@ -110,8 +129,7 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 		return FileUtils.getFile(tmpTemplatesFolder, template.name,output)
 	}
 
-	boolean hasTemplate(Template template, String output){
-		
+	boolean hasTemplate(Template template, String output){		
 		File templateFile = FileUtils.getFile(getTempTemplateFolder(template, output),'template.tpl')
 		return templateFile.exists() && !templateFile.text.isEmpty()
 	}
@@ -126,20 +144,20 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 
 	File getTempSourceDocument(Document doc, Template template, String lang, String output){
 		def dir = getTempOutputFolder(doc, template, lang, output)
-		return FileUtils.getFile(dir, "${doc.name}-${lang}.${doc.type}")
+		return FileUtils.getFile(dir, "${doc.name}.${doc.type}")
 	}
 
 	File getTempOutputDocument(Document doc, Template template, String lang, String output){
 		def dir = getTempOutputFolder(doc, template, lang, output)
-		return FileUtils.getFile(dir, "${doc.name}-${lang}.${output}")
+		return FileUtils.getFile(dir, "${doc.name}.${output}")
 	}
 
-
-
+	@Internal
 	String[] getSupportedDocumentTypes(){
 		return ['tex', 'md', 'lyx']
 	}
 
+	@Internal
 	String[] getSupportedOutputTypes(){
 		return ['pdf', 'html']
 	}
@@ -153,7 +171,7 @@ abstract class AbstractDocumentationTask extends DefaultTask {
 		FileUtils.write(file, replaced)
 	}
 
-
+	@Internal
 	Properties getGlobalVariables() {
 		def documentVersion = new SimpleDateFormat('yyyyMMdd - dd MMMM yyyy', Locale.ENGLISH).format(new Date())
 		def magicVariablesMap = new Properties()

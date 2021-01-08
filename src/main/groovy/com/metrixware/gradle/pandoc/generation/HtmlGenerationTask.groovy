@@ -11,6 +11,10 @@ import com.metrixware.gradle.pandoc.Document
 import com.metrixware.gradle.pandoc.Template
 import com.metrixware.gradle.pandoc.postprocess.Latex2HtmlReferencesPostprocessor
 
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
+
 class HtmlGenerationTask extends AbstractPandocGenerationTask{
 
 	@Override
@@ -23,6 +27,7 @@ class HtmlGenerationTask extends AbstractPandocGenerationTask{
 		return 'html5'
 	}
 
+	@Input
 	@Override
 	protected int getTocDepth() {
 		return 2

@@ -22,6 +22,11 @@ import org.slf4j.LoggerFactory
 import com.metrixware.gradle.pandoc.AbstractDocumentationTask
 import com.metrixware.gradle.pandoc.Document
 import com.metrixware.gradle.pandoc.Template
+
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
+
 /**
  * Abstract documentation generation task. It process all tuples of (document,template,output,language).
  * @author afloch
@@ -31,17 +36,23 @@ abstract class AbstractGenerationTask extends AbstractDocumentationTask {
 	
 
 	protected void process() {
-		for(Document document : documents){
-			def supported = templates.findAll {Template t -> document.support(t)}
+		for(Document document : documents) {
+			def supported = templates.findAll {
+				Template t -> document.support(t)
+			}
+
 			for(Template template : supported){
-				for(String output : template.outputs){
-					if(isSupported(document,output)){
-						for(String lang : document.languages){
+				for(String output : template.outputs) {
+
+					if(isSupported(document, output)) {
+
+						for(String lang : document.languages) {
 							def dir = getTempOutputFolder(document, template, lang, output)
 							dir.mkdirs()
 							println("Generate document ${document.name} ${template.name} [${output},${lang}]")
-							process(dir, document,template,lang,output)
+							process(dir, document, template, lang, output)
 						}
+
 					}
 				}
 			}
@@ -51,22 +62,26 @@ abstract class AbstractGenerationTask extends AbstractDocumentationTask {
 
 	protected abstract void process(File folder,Document doc, Template template, String lang, String output)
 
+	@OutputDirectory
 	File getTempSourceDocument(Document doc, Template template, String lang, String output){
 		def dir = getTempOutputFolder(doc, template, lang, output)
-		return FileUtils.getFile(dir, "${doc.name}-${lang}.${doc.type}")
+		return FileUtils.getFile(dir, "${doc.name}.${doc.type}")
 	}
 
+	@OutputDirectory
 	File getTempOutputDocument(Document doc, Template template, String lang, String output){
 		def dir = getTempOutputFolder(doc, template, lang, output)
-		return FileUtils.getFile(dir, "${doc.name}-${lang}.${output}")
+		return FileUtils.getFile(dir, "${doc.name}.${output}")
 	}
 
+	@OutputDirectory
 	File getDocumentOutputFolder(Document doc, Template template, String lang, String output){
 		return FileUtils.getFile(outputDir,doc.name,template.name,lang,output)
 	}
 
+	@OutputFile
 	File getDocumentOutputFile(Document doc, Template template, String lang, String output){
-		return FileUtils.getFile(getDocumentOutputFolder(doc,template,lang,output),"${doc.name}-${lang}.${output}")
+		return FileUtils.getFile(getDocumentOutputFolder(doc,template,lang,output),"${doc.name}.${output}")
 	}
 }
 

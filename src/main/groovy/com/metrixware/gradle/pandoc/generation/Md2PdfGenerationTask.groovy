@@ -42,7 +42,7 @@ class Md2PdfGenerationTask extends AbstractPandocGenerationTask {
 		def generateCmdLine = [
 			project.documentation.panDocBin,
 			'--toc',
-			'--toc-depth='+tocDepth,
+			'--toc-depth=' + getTocDepth(),
 			'--section-divs',
 			'--smart',
 			'--listings',

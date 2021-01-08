@@ -29,8 +29,6 @@ class ToolCheckingTask extends AbstractDocumentationTask {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger('pandoc-tools')
 
-
-
 	protected void process() {
 
 		if (!checkPandocPresence()) {

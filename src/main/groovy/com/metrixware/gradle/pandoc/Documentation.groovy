@@ -15,14 +15,23 @@
  */
 package com.metrixware.gradle.pandoc
 
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
 
 class Documentation {
 
+	@Input
 	Map<String, Object> templateVariables = new HashMap<String, Object>()
 	// Binaries
+
+	@Input
 	String panDocBin = 'pandoc'
+
+	@Input
 	String pdfTexBin ='xelatex'
 
+	@Input
 	String[] sources=[
 		'tex',
 		'html',
@@ -31,9 +40,13 @@ class Documentation {
 		'tpl'
 	]
 
-
+	@Input
 	String docsDirectory='docs'
+
+	@Input
 	String tmpDirectory='build/tmp'
+
+	@Input
 	String outputDirectory='build/site'
 
 

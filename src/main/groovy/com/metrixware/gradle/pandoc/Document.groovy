@@ -5,12 +5,25 @@ import groovy.lang.Closure
 
 import java.util.Map
 
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
 
 class Document {
+	@Input
 	String name
+
+	@Input
 	String type='md'
+
+	@Input
 	String[] languages=['en']
+
+	@Input
 	String[] templates=['all']
+	
+	@Input
+	String[] includedSources = []
 
 	Document(String name){
 		this.name = name
@@ -37,21 +50,12 @@ class Document {
 		return type
 	}
 
-	String[] getSupportedTemplates() {
+	String[] getTemplates() {
 		return templates
 	}
 
-
-	String getDocsDirectory() {
-		return docsDirectory
-	}
-
-	String getOutputDirectory() {
-		return outputDirectory
-	}
-
-	String getTmpDirectory() {
-		return tmpDirectory
+	String[] getIncludedSources() {
+		return includedSources
 	}
 
 	@Override

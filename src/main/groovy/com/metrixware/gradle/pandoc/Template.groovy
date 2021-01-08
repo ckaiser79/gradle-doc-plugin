@@ -1,10 +1,15 @@
 
 package com.metrixware.gradle.pandoc
 
-
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
 
 class Template {
+	@Input
 	String name
+
+	@Input
 	String[] outputs=['html']
 
 	Template(String name){

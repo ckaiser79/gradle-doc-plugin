@@ -164,6 +164,7 @@ class DocumentationPrepareTask extends AbstractDocumentationTask {
 	}
 
 	protected boolean isSourceFile(File file){
+
 		String[] types = project.documentation.sources
 		for(String type: types){
 			if(file.name.endsWith(type)){

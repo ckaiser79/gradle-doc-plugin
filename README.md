@@ -111,7 +111,7 @@ Documentation project structure:
 
 ## Fill your document
 
-Insert the following dummy markdown content into the `docs/source/example/en/example-en.md` file that has been automatically created by the previous configuration step.
+Insert the following dummy markdown content into the `docs/source/example/en/example.md` file that has been automatically created by the previous configuration step.
 
 	
 	My Document
@@ -163,7 +163,7 @@ By default, the documentation is generated into the folder **site** inside your 
 	│   └── tmp/
 
 Thus, to see the PDF document of your documentation, open the file:
- `build/site/example/standard/en/pdf/example-en.pdf`
+ `build/site/example/standard/en/pdf/example.pdf`
 
 To match your design needs, you can customize the generated documents through a template mechanism detailled in the user guide.
 
@@ -209,9 +209,9 @@ The next pragraphs shows the different customization options of the global confi
 #### Binaries paths
 
 |  Variable   |  Default value | 
-|:----------|:-------------:|
-|panDocBin 		|  pandoc|
-|pdfTexBin 		|   xelatex   |  
+|:------------|:--------------:|
+|panDocBin 	  |   pandoc       |
+|pdfTexBin 	  |   xelatex      |  
 
 #### Generation paths
 
@@ -372,11 +372,11 @@ Below is a example of generated directory structure for a markdown document name
 	│   ├── sources/
 	│	│   ├── example
 	│	│   │	├── en/
-	|	│	│   │	├── example-en.md
-	|	│	│   │	├── example-en.properties	
+	|	│	│   │	├── example.md
+	|	│	│   │	├── example.properties	
 	│	│   │	├── fr/	
-	|	|	│	│   	├── example-fr.md
-	|	│	│   │	├── example-fr.properties
+	|	|	│	│   	├── example.md
+	|	│	│   │	├── example.properties
 
 The `.properties` file in each document directory specifies all document variables provided by the document. Those variables may be used in the template or in the document itself.
 

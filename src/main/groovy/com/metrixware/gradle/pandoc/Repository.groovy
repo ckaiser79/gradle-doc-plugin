@@ -1,10 +1,16 @@
 
 package com.metrixware.gradle.pandoc
 
-
+import org.gradle.api.*;
+import org.gradle.api.file.*;
+import org.gradle.api.tasks.*;
 
 class Repository {
+
+	@Input
 	String name
+
+	@Input
 	String url
 	
 	Repository(String name){
