@@ -1,9 +1,8 @@
-This is a fork of https://github.com/sleroy/gradle-doc-plugin
+This is a fork of https://github.com/sleroy/gradle-doc-plugin.
 
-[![Travis Build Status](http://img.shields.io/travis/sleroy/gradle-pandoc-plugin.svg)](https://travis-ci.org/sleroy/gradle-doc-plugin)
-[![Coverage Status](http://img.shields.io/coveralls/sleroy/gradle-pandoc-plugin.svg)](https://coveralls.io/r/sleroy/gradle-doc-plugin)
+[Github Build Status](https://github.com/ckaiser79/gradle-doc-plugin/actions?query=workflow%3A%22Java+CI+with+Gradle%22)
 [![Semantic Versioning](http://img.shields.io/:semver-0.1.1-blue.svg)](http://semver.org)
-[![Bintray](http://img.shields.io/badge/download-latest-bb00bb.svg)](https://bintray.com/sleroy/kordamp/gradle-doc-plugin)
+[![Bintray](http://img.shields.io/badge/download-latest-bb00bb.svg)](https://github.com/ckaiser79/gradle-doc-plugin/releases)
 
 Overview
 ==
