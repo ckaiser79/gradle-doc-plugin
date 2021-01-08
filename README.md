@@ -20,7 +20,7 @@ Prerequisites
 
 The plugin requires several programs installed on your machine. Basically, on a Ubuntu system, install the following packages `pandoc, latex`.
 
-Obviously, [gradle](http://www.gradle.org/) should be installed and located in your $PATH variable. The plugin has been developped and tested for gradle v2.1.
+Obviously, [gradle](http://www.gradle.org/) should be installed and located in your $PATH variable. The plugin has been developped and tested for gradle v6.5.7.
 
 Quickstart
 ==
