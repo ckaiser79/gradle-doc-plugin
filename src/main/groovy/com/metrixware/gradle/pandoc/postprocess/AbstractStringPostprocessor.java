@@ -30,7 +30,7 @@ public abstract class AbstractStringPostprocessor implements IPostProcessor {
 			String inString = readInputString(input);
 
 			String result = process(inString);
-			IOUtils.write(result, output);
+			IOUtils.write(result, output, encoding);
 
 		} catch (IOException e) {
 			LOGGER.error(e.getMessage(), e);
