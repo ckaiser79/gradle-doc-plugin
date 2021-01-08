@@ -15,3 +15,7 @@ build
 bin
 .gradle
 .vscode
+.settings
+.project
+.classpath
+*.code-workspace
