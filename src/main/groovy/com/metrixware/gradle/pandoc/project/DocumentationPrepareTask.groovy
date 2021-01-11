@@ -140,11 +140,13 @@ class DocumentationPrepareTask extends AbstractDocumentationTask {
 		docVariables.putAll(magicVariablesMap)
 		dir.mkdirs()
 
-		//copy document sources into tmp folder for the tuple (template,lang,output)
-		def folder = getDocumentFolder(document,lang)
-		logger.info('folder = ' + folder)
+		// copy document sources into tmp folder for the tuple (template,lang,output)
+		// most specific image wins
+		
+		def defaultFolder = new File(getDocumentFolder(document,lang), '../../default')
+		logger.info('defaultFolder = ' + defaultFolder)
 		project.copy {
-			from folder
+			from defaultFolder
 			into dir
 		}
 
@@ -155,10 +157,10 @@ class DocumentationPrepareTask extends AbstractDocumentationTask {
 			into dir
 		}
 
-		def defaultFolder = new File(getDocumentFolder(document,lang), '../../default')
-		logger.info('defaultFolder = ' + defaultFolder)
+		def folder = getDocumentFolder(document,lang)
+		logger.info('folder = ' + folder)
 		project.copy {
-			from defaultFolder
+			from folder
 			into dir
 		}
 
