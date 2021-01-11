@@ -141,8 +141,24 @@ class DocumentationPrepareTask extends AbstractDocumentationTask {
 		dir.mkdirs()
 
 		//copy document sources into tmp folder for the tuple (template,lang,output)
+		def folder = getDocumentFolder(document,lang)
+		logger.info('folder = ' + folder)
 		project.copy {
-			from getDocumentFolder(document,lang)
+			from folder
+			into dir
+		}
+
+		def defaultLanguageFolder = getDocumentFolder(document,'default')
+		logger.info('defaultLanguageFolder = ' + defaultLanguageFolder)
+		project.copy {
+			from defaultLanguageFolder
+			into dir
+		}
+
+		def defaultFolder = new File(getDocumentFolder(document,lang), '../../default')
+		logger.info('defaultFolder = ' + defaultFolder)
+		project.copy {
+			from defaultFolder
 			into dir
 		}
 

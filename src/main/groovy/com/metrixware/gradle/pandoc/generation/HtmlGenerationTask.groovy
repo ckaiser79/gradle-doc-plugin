@@ -37,6 +37,10 @@ class HtmlGenerationTask extends AbstractPandocGenerationTask{
 	protected void copyToSite(File folder, Document doc,
 			Template template, String lang, String output) {
 		def out =  getDocumentOutputFile(doc, template, lang, output)
+
+		logger.debug('using tmp folder ' + folder)
+
+		/* sources/example/en */
 		project.copy {
 			from(folder) {
 				include 'images/**'
@@ -45,6 +49,7 @@ class HtmlGenerationTask extends AbstractPandocGenerationTask{
 			}
 			into getDocumentOutputFolder(doc, template, lang, output)
 		}
+
 		FileUtils.copyFile(getTempOutputDocument(doc, template, lang, output),out)
 		def postprocess = new Latex2HtmlReferencesPostprocessor('utf-8')
 		postprocess.process(out)
